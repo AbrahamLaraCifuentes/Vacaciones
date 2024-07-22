@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>LugaresDao.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+LugaresDao.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">vacaciones</span><span class="s2">.</span><span class="s1">database</span>
+
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">ContentValues</span>
+<span class="s1">import vacaciones</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">DBLugares</span><span class="s2">.</span><span class="s1">TablaLugares</span>
+
+<span class="s0">class </span><span class="s1">LugaresDao</span><span class="s2">(</span><span class="s0">val </span><span class="s1">db: DBHelper</span><span class="s2">) {</span>
+
+    <span class="s0">fun </span><span class="s1">finAll</span><span class="s2">()</span><span class="s1">:List</span><span class="s2">&lt;</span><span class="s1">Lugar</span><span class="s2">&gt;{</span>
+        <span class="s0">val </span><span class="s1">cursor </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">readableDatabase</span><span class="s2">.</span><span class="s1">query</span><span class="s2">(</span>
+            <span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">TABLA_LISTA_LUGARES</span><span class="s2">,</span>
+            <span class="s0">null</span><span class="s2">,</span>
+            <span class="s3">&quot;&quot;</span><span class="s2">,</span>
+            <span class="s0">null</span><span class="s2">,</span>
+            <span class="s0">null</span><span class="s2">,</span>
+            <span class="s0">null</span><span class="s2">,</span>
+            <span class="s0">null</span>
+        <span class="s2">)</span>
+        <span class="s0">val </span><span class="s1">lista </span><span class="s2">= </span><span class="s1">mutableListOf</span><span class="s2">&lt;</span><span class="s1">Lugar</span><span class="s2">&gt;()</span>
+
+        <span class="s0">while </span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">moveToNext</span><span class="s2">()) {</span>
+            <span class="s0">val </span><span class="s1">id </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_ID</span><span class="s2">) )</span>
+
+            <span class="s0">val </span><span class="s1">lugar </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_LUGAR</span><span class="s2">) )</span>
+
+            <span class="s0">val </span><span class="s1">imageUrl </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_IMG_URL</span><span class="s2">) )</span>
+
+            <span class="s0">val </span><span class="s1">latLong </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_LAT_LONG</span><span class="s2">) )</span>
+
+            <span class="s0">val </span><span class="s1">orden</span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_ORDEN</span><span class="s2">) )</span>
+
+            <span class="s0">val </span><span class="s1">alojamiento </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_ALOJAMIENTO</span><span class="s2">) )</span>
+
+            <span class="s0">val </span><span class="s1">traslado </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_TRASLADO</span><span class="s2">) )</span>
+
+            <span class="s0">val </span><span class="s1">comentarios </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_COMENTARIOS</span><span class="s2">) )</span>
+
+
+            <span class="s0">val </span><span class="s1">sitios</span>
+            <span class="s2">= </span><span class="s1">Lugar</span><span class="s2">(</span><span class="s1">id</span><span class="s2">, </span><span class="s1">lugar</span><span class="s2">, </span><span class="s1">imageUrl</span><span class="s2">, </span><span class="s1">latLong </span><span class="s2">,</span><span class="s1">orden</span><span class="s2">, </span><span class="s1">alojamiento</span><span class="s2">, </span><span class="s1">traslado</span><span class="s2">, </span><span class="s1">comentarios</span><span class="s2">)</span>
+            <span class="s1">lista</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">sitios</span><span class="s2">)</span>
+        <span class="s2">}</span>
+        <span class="s1">cursor</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()</span>
+        <span class="s0">return </span><span class="s1">lista</span>
+    <span class="s2">}</span>
+
+    <span class="s0">fun </span><span class="s1">findById</span><span class="s2">(</span><span class="s1">id: String</span><span class="s2">)</span><span class="s1">: Lugar? </span><span class="s2">{</span>
+        <span class="s0">val </span><span class="s1">db </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">readableDatabase</span>
+        <span class="s0">val </span><span class="s1">cursor </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">query</span><span class="s2">(</span>
+            <span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">TABLA_LISTA_LUGARES</span><span class="s2">,</span>
+            <span class="s0">null</span><span class="s2">,</span>
+            <span class="s3">&quot;</span><span class="s0">${</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_ID</span><span class="s0">} </span><span class="s3">= ?&quot;</span><span class="s2">,</span>
+            <span class="s1">arrayOf</span><span class="s2">(</span><span class="s1">id</span><span class="s2">),</span>
+            <span class="s0">null</span><span class="s2">,</span>
+            <span class="s0">null</span><span class="s2">,</span>
+            <span class="s0">null</span>
+        <span class="s2">)</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">moveToFirst</span><span class="s2">()) {</span>
+            <span class="s0">val </span><span class="s1">id </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_ID</span><span class="s2">))</span>
+            <span class="s0">val </span><span class="s1">lugar </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_LUGAR</span><span class="s2">))</span>
+            <span class="s0">val </span><span class="s1">imageUrl </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_IMG_URL</span><span class="s2">))</span>
+            <span class="s0">val </span><span class="s1">latLong </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_LAT_LONG</span><span class="s2">))</span>
+            <span class="s0">val </span><span class="s1">orden </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_ORDEN</span><span class="s2">))</span>
+            <span class="s0">val </span><span class="s1">alojamiento </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_ALOJAMIENTO</span><span class="s2">))</span>
+            <span class="s0">val </span><span class="s1">traslado </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_TRASLADO</span><span class="s2">))</span>
+            <span class="s0">val </span><span class="s1">comentarios </span><span class="s2">= </span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s1">cursor</span><span class="s2">.</span><span class="s1">getColumnIndexOrThrow</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_COMENTARIOS</span><span class="s2">))</span>
+
+
+            <span class="s0">val </span><span class="s1">lugarId </span><span class="s2">= </span><span class="s1">Lugar</span><span class="s2">(</span><span class="s1">id</span><span class="s2">, </span><span class="s1">lugar</span><span class="s2">, </span><span class="s1">imageUrl</span><span class="s2">, </span><span class="s1">latLong</span><span class="s2">, </span><span class="s1">orden</span><span class="s2">, </span><span class="s1">alojamiento</span><span class="s2">, </span><span class="s1">traslado</span><span class="s2">, </span><span class="s1">comentarios</span><span class="s2">)</span>
+
+            <span class="s0">return </span><span class="s1">lugarId</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s0">return null</span>
+        <span class="s2">}</span>
+        <span class="s1">cursor</span><span class="s2">.</span><span class="s1">close</span><span class="s2">()</span>
+    <span class="s2">}</span>
+
+
+
+    <span class="s0">fun </span><span class="s1">insertar</span><span class="s2">(</span><span class="s1">sitio: Lugar</span><span class="s2">)</span><span class="s1">: Long </span><span class="s2">{</span>
+        <span class="s0">val </span><span class="s1">valores </span><span class="s2">= </span><span class="s1">ContentValues</span><span class="s2">().</span><span class="s1">apply </span><span class="s2">{</span>
+            <span class="s1">put</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_LUGAR</span><span class="s2">, </span><span class="s1">sitio</span><span class="s2">.</span><span class="s1">lugar</span><span class="s2">)</span>
+            <span class="s1">put</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_IMG_URL</span><span class="s2">, </span><span class="s1">sitio</span><span class="s2">.</span><span class="s1">imageUrl</span><span class="s2">)</span>
+            <span class="s1">put</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_LAT_LONG</span><span class="s2">, </span><span class="s1">sitio</span><span class="s2">.</span><span class="s1">latLong</span><span class="s2">)</span>
+            <span class="s1">put</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_ORDEN</span><span class="s2">, </span><span class="s1">sitio</span><span class="s2">.</span><span class="s1">orden</span><span class="s2">)</span>
+            <span class="s1">put</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_ALOJAMIENTO</span><span class="s2">, </span><span class="s1">sitio</span><span class="s2">.</span><span class="s1">alojamiento</span><span class="s2">)</span>
+            <span class="s1">put</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_TRASLADO</span><span class="s2">, </span><span class="s1">sitio</span><span class="s2">.</span><span class="s1">traslado</span><span class="s2">)</span>
+            <span class="s1">put</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_COMENTARIOS</span><span class="s2">, </span><span class="s1">sitio</span><span class="s2">.</span><span class="s1">comentarios</span><span class="s2">)</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">db</span><span class="s2">.</span><span class="s1">writableDatabase</span><span class="s2">.</span><span class="s1">insert</span><span class="s2">(</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">TABLA_LISTA_LUGARES</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s1">valores</span><span class="s2">)</span>
+    <span class="s2">}</span>
+
+    <span class="s0">fun </span><span class="s1">eliminarLugar</span><span class="s2">(</span><span class="s1">id: Int</span><span class="s2">)</span><span class="s1">: Int </span><span class="s2">{</span>
+        <span class="s0">val </span><span class="s1">resultado </span><span class="s2">= </span><span class="s1">db</span><span class="s2">.</span><span class="s1">writableDatabase</span><span class="s2">.</span><span class="s1">delete</span><span class="s2">(</span>
+            <span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">TABLA_LISTA_LUGARES</span><span class="s2">,</span>
+            <span class="s3">&quot;</span><span class="s0">${</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_ID</span><span class="s0">} </span><span class="s3">= ?&quot;</span><span class="s2">,</span>
+            <span class="s1">arrayOf</span><span class="s2">(</span><span class="s1">id</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">())</span>
+        <span class="s2">)</span>
+        <span class="s0">return </span><span class="s1">resultado</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<html>
+<head>
+<title>HomeScreen.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+HomeScreen.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">vacaciones</span><span class="s2">.</span><span class="s1">screen</span>
+
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">SuppressLint</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Log</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">Image</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">Arrangement</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">Box</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">Column</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">Row</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">Spacer</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">fillMaxSize</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">fillMaxWidth</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">padding</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">lazy</span><span class="s2">.</span><span class="s1">LazyColumn</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">foundation</span><span class="s2">.</span><span class="s1">lazy</span><span class="s2">.</span><span class="s1">itemsIndexed</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material</span><span class="s2">.</span><span class="s1">icons</span><span class="s2">.</span><span class="s1">Icons</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material</span><span class="s2">.</span><span class="s1">icons</span><span class="s2">.</span><span class="s1">filled</span><span class="s2">.</span><span class="s1">AccountBox</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material</span><span class="s2">.</span><span class="s1">icons</span><span class="s2">.</span><span class="s1">filled</span><span class="s2">.</span><span class="s1">Add</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material</span><span class="s2">.</span><span class="s1">icons</span><span class="s2">.</span><span class="s1">filled</span><span class="s2">.</span><span class="s1">Delete</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material</span><span class="s2">.</span><span class="s1">icons</span><span class="s2">.</span><span class="s1">filled</span><span class="s2">.</span><span class="s1">LocationOn</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material3</span><span class="s2">.</span><span class="s1">CircularProgressIndicator</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material3</span><span class="s2">.</span><span class="s1">ExperimentalMaterial3Api</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material3</span><span class="s2">.</span><span class="s1">ExtendedFloatingActionButton</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material3</span><span class="s2">.</span><span class="s1">Icon</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material3</span><span class="s2">.</span><span class="s1">IconButton</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material3</span><span class="s2">.</span><span class="s1">MaterialTheme</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material3</span><span class="s2">.</span><span class="s1">Scaffold</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">material3</span><span class="s2">.</span><span class="s1">Text</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">runtime</span><span class="s2">.</span><span class="s1">Composable</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">runtime</span><span class="s2">.</span><span class="s1">LaunchedEffect</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">runtime</span><span class="s2">.</span><span class="s1">mutableStateListOf</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">runtime</span><span class="s2">.</span><span class="s1">mutableStateOf</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">runtime</span><span class="s2">.</span><span class="s1">remember</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">runtime</span><span class="s2">.</span><span class="s1">rememberCoroutineScope</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">Alignment</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">Modifier</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">graphics</span><span class="s2">.</span><span class="s1">Color</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">platform</span><span class="s2">.</span><span class="s1">LocalContext</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">res</span><span class="s2">.</span><span class="s1">painterResource</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">font</span><span class="s2">.</span><span class="s1">FontWeight</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">style</span><span class="s2">.</span><span class="s1">TextAlign</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">unit</span><span class="s2">.</span><span class="s1">dp</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">ui</span><span class="s2">.</span><span class="s1">unit</span><span class="s2">.</span><span class="s1">sp</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">navigation</span><span class="s2">.</span><span class="s1">NavController</span>
+<span class="s1">import coil</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">AsyncImagePainter</span>
+<span class="s1">import coil</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">SubcomposeAsyncImage</span>
+<span class="s1">import coil</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">SubcomposeAsyncImageContent</span>
+<span class="s1">import vacaciones</span><span class="s2">.</span><span class="s1">R</span>
+<span class="s1">import vacaciones</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">DBHelper</span>
+<span class="s1">import vacaciones</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">Lugar</span>
+<span class="s1">import vacaciones</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">LugaresDao</span>
+<span class="s1">import vacaciones</span><span class="s2">.</span><span class="s1">ws</span><span class="s2">.</span><span class="s1">CambioAPI</span>
+<span class="s1">import kotlinx</span><span class="s2">.</span><span class="s1">coroutines</span><span class="s2">.</span><span class="s1">Dispatchers</span>
+<span class="s1">import kotlinx</span><span class="s2">.</span><span class="s1">coroutines</span><span class="s2">.</span><span class="s1">launch</span>
+<span class="s1">import kotlinx</span><span class="s2">.</span><span class="s1">coroutines</span><span class="s2">.</span><span class="s1">withContext</span>
+
+
+<span class="s1">@SuppressLint</span><span class="s2">(</span><span class="s3">&quot;UnusedMaterial3ScaffoldPaddingParameter&quot;</span><span class="s2">)</span>
+<span class="s1">@OptIn</span><span class="s2">(</span><span class="s1">ExperimentalMaterial3Api::</span><span class="s0">class</span><span class="s2">)</span>
+<span class="s1">@Composable</span>
+<span class="s0">fun </span><span class="s1">HomeScreen</span><span class="s2">(</span><span class="s1">navController: NavController</span><span class="s2">) {</span>
+    <span class="s0">val </span><span class="s1">contexto </span><span class="s2">= </span><span class="s1">LocalContext</span><span class="s2">.</span><span class="s1">current</span>
+    <span class="s0">val </span><span class="s1">coroutineScope </span><span class="s2">= </span><span class="s1">rememberCoroutineScope</span><span class="s2">()</span>
+    <span class="s0">val </span><span class="s2">(</span><span class="s1">lugares</span><span class="s2">, </span><span class="s1">setLugares</span><span class="s2">) = </span><span class="s1">remember </span><span class="s2">{ </span><span class="s1">mutableStateOf</span><span class="s2">(</span><span class="s1">listOf</span><span class="s2">&lt;</span><span class="s1">Lugar</span><span class="s2">&gt;()) }</span>
+    <span class="s0">val </span><span class="s1">cambioDolarAlojamientoList </span><span class="s2">= </span><span class="s1">remember </span><span class="s2">{ </span><span class="s1">mutableStateListOf</span><span class="s2">&lt;</span><span class="s1">Double</span><span class="s2">&gt;() }</span>
+    <span class="s0">val </span><span class="s1">cambioDolarTrasladoList </span><span class="s2">= </span><span class="s1">remember </span><span class="s2">{ </span><span class="s1">mutableStateListOf</span><span class="s2">&lt;</span><span class="s1">Double</span><span class="s2">&gt;() }</span>
+
+    <span class="s0">for </span><span class="s2">(</span><span class="s1">i </span><span class="s0">in </span><span class="s1">lugares</span><span class="s2">.</span><span class="s1">indices</span><span class="s2">) {</span>
+        <span class="s1">cambioDolarAlojamientoList</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s4">0.0</span><span class="s2">)</span>
+        <span class="s1">cambioDolarTrasladoList</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s4">0.0</span><span class="s2">)</span>
+    <span class="s2">}</span>
+
+    <span class="s1">LaunchedEffect</span><span class="s2">(</span><span class="s1">Unit</span><span class="s2">) {</span>
+        <span class="s1">withContext</span><span class="s2">(</span><span class="s1">Dispatchers</span><span class="s2">.</span><span class="s1">IO</span><span class="s2">) {</span>
+            <span class="s0">val </span><span class="s1">dbHelper </span><span class="s2">= </span><span class="s1">DBHelper</span><span class="s2">(</span><span class="s1">contexto</span><span class="s2">)</span>
+            <span class="s0">var </span><span class="s1">dao </span><span class="s2">= </span><span class="s1">LugaresDao</span><span class="s2">(</span><span class="s1">dbHelper</span><span class="s2">)</span>
+
+            <span class="s1">setLugares</span><span class="s2">(</span><span class="s1">dao</span><span class="s2">.</span><span class="s1">finAll</span><span class="s2">())</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">Scaffold</span><span class="s2">(</span>
+        <span class="s1">floatingActionButton </span><span class="s2">= {</span>
+            <span class="s1">ExtendedFloatingActionButton</span><span class="s2">(</span>
+                <span class="s1">onClick </span><span class="s2">= { </span><span class="s1">navController</span><span class="s2">.</span><span class="s1">navigate</span><span class="s2">(</span><span class="s3">&quot;form_screen&quot;</span><span class="s2">) },</span>
+                <span class="s1">content </span><span class="s2">= {</span>
+                    <span class="s1">Row</span><span class="s2">(</span><span class="s1">verticalAlignment </span><span class="s2">= </span><span class="s1">Alignment</span><span class="s2">.</span><span class="s1">CenterVertically</span><span class="s2">) {</span>
+                        <span class="s1">Icon</span><span class="s2">(</span><span class="s1">Icons</span><span class="s2">.</span><span class="s1">Filled</span><span class="s2">.</span><span class="s1">Add</span><span class="s2">, </span><span class="s1">contentDescription </span><span class="s2">= </span><span class="s3">&quot;Agregar&quot;</span><span class="s2">)</span>
+                        <span class="s1">Text</span><span class="s2">(</span><span class="s1">text </span><span class="s2">= </span><span class="s3">&quot; Agregar Lugar &quot;</span><span class="s2">)</span>
+                    <span class="s2">}</span>
+                <span class="s2">}</span>
+            <span class="s2">)</span>
+        <span class="s2">}</span>
+    <span class="s2">) {</span>
+        <span class="s1">Box</span><span class="s2">(</span>
+            <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span>
+                <span class="s2">.</span><span class="s1">fillMaxSize</span><span class="s2">()</span>
+        <span class="s2">) {</span>
+            <span class="s1">LazyColumn</span><span class="s2">(</span>
+                <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span>
+                    <span class="s2">.</span><span class="s1">fillMaxSize</span><span class="s2">()</span>
+            <span class="s2">) {</span>
+                <span class="s1">itemsIndexed</span><span class="s2">(</span><span class="s1">lugares</span><span class="s2">) { </span><span class="s1">index</span><span class="s2">, </span><span class="s1">lugar </span><span class="s2">-&gt;</span>
+                    <span class="s1">Column</span><span class="s2">(</span>
+                        <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span>
+                            <span class="s2">.</span><span class="s1">fillMaxWidth</span><span class="s2">()</span>
+                            <span class="s2">.</span><span class="s1">padding</span><span class="s2">(</span><span class="s4">8</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">)</span>
+                    <span class="s2">) {</span>
+                        <span class="s1">Row</span><span class="s2">(</span>
+                            <span class="s1">verticalAlignment </span><span class="s2">= </span><span class="s1">Alignment</span><span class="s2">.</span><span class="s1">CenterVertically</span><span class="s2">,</span>
+                            <span class="s1">horizontalArrangement </span><span class="s2">= </span><span class="s1">Arrangement</span><span class="s2">.</span><span class="s1">SpaceBetween</span>
+                        <span class="s2">) {</span>
+                            <span class="s1">Column</span><span class="s2">(</span>
+                                <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span>
+                                    <span class="s2">.</span><span class="s1">weight</span><span class="s2">(</span><span class="s4">3f</span><span class="s2">)</span>
+                                    <span class="s2">.</span><span class="s1">padding</span><span class="s2">(</span><span class="s4">10</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">)</span>
+                            <span class="s2">) {</span>
+                                <span class="s1">SubcomposeAsyncImage</span><span class="s2">(</span>
+                                    <span class="s1">model </span><span class="s2">= </span><span class="s1">lugar</span><span class="s2">.</span><span class="s1">imageUrl</span><span class="s2">,</span>
+                                    <span class="s1">contentDescription </span><span class="s2">= </span><span class="s3">&quot;Img Url&quot;</span><span class="s2">,</span>
+                                <span class="s2">) {</span>
+                                    <span class="s0">when </span><span class="s2">(</span><span class="s1">painter</span><span class="s2">.</span><span class="s1">state</span><span class="s2">) {</span>
+                                        <span class="s0">is </span><span class="s1">AsyncImagePainter</span><span class="s2">.</span><span class="s1">State</span><span class="s2">.</span><span class="s1">Loading </span><span class="s2">-&gt; </span><span class="s1">CircularProgressIndicator</span><span class="s2">()</span>
+                                        <span class="s0">is </span><span class="s1">AsyncImagePainter</span><span class="s2">.</span><span class="s1">State</span><span class="s2">.</span><span class="s1">Empty </span><span class="s2">-&gt; </span><span class="s1">Image</span><span class="s2">(</span>
+                                            <span class="s1">painterResource</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">image_not_found</span><span class="s2">),</span>
+                                            <span class="s1">contentDescription </span><span class="s2">= </span><span class="s3">&quot;Not Found&quot;</span>
+                                        <span class="s2">)</span>
+
+                                        <span class="s0">is </span><span class="s1">AsyncImagePainter</span><span class="s2">.</span><span class="s1">State</span><span class="s2">.</span><span class="s1">Error </span><span class="s2">-&gt; </span><span class="s1">Image</span><span class="s2">(</span>
+                                            <span class="s1">painterResource</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">drawable</span><span class="s2">.</span><span class="s1">error_icon</span><span class="s2">),</span>
+                                            <span class="s1">contentDescription </span><span class="s2">= </span><span class="s3">&quot;Error&quot;</span>
+                                        <span class="s2">)</span>
+
+                                        <span class="s0">else </span><span class="s2">-&gt; </span><span class="s1">SubcomposeAsyncImageContent</span><span class="s2">()</span>
+                                    <span class="s2">}</span>
+                                <span class="s2">}</span>
+
+                            <span class="s2">}</span>
+
+                            <span class="s1">Column</span><span class="s2">(</span>
+                                <span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">weight</span><span class="s2">(</span><span class="s4">2f</span><span class="s2">)</span>
+                            <span class="s2">) {</span>
+                                <span class="s1">LaunchedEffect</span><span class="s2">(</span><span class="s1">lugar</span><span class="s2">.</span><span class="s1">alojamiento</span><span class="s2">) {</span>
+                                    <span class="s1">coroutineScope</span><span class="s2">.</span><span class="s1">launch</span><span class="s2">(</span><span class="s1">Dispatchers</span><span class="s2">.</span><span class="s1">IO</span><span class="s2">) {</span>
+                                        <span class="s0">try </span><span class="s2">{</span>
+                                            <span class="s0">val </span><span class="s1">tiposCambio </span><span class="s2">=</span>
+                                                <span class="s1">CambioAPI</span><span class="s2">.</span><span class="s1">service</span><span class="s2">.</span><span class="s1">getCambioDolar</span><span class="s2">().</span><span class="s1">resultado</span>
+                                            <span class="s1">cambioDolarAlojamientoList</span><span class="s2">[</span><span class="s1">index</span><span class="s2">] =</span>
+                                                <span class="s1">lugar</span><span class="s2">.</span><span class="s1">alojamiento</span><span class="s2">.</span><span class="s1">toDoubleOrNull</span><span class="s2">()</span>
+                                                    <span class="s1">?</span><span class="s2">.</span><span class="s1">let </span><span class="s2">{ </span><span class="s1">it </span><span class="s2">/ </span><span class="s1">tiposCambio</span><span class="s2">.</span><span class="s1">firstOrNull</span><span class="s2">()</span><span class="s1">?</span><span class="s2">.</span><span class="s1">precio</span><span class="s2">!! }</span>
+                                                    <span class="s1">?: </span><span class="s4">0.0</span>
+                                        <span class="s2">} </span><span class="s1">catch </span><span class="s2">(</span><span class="s1">e: Exception</span><span class="s2">) {</span>
+                                            <span class="s1">Log</span><span class="s2">.</span><span class="s1">e</span><span class="s2">(</span><span class="s3">&quot;CambioAPI&quot;</span><span class="s2">, </span><span class="s1">e</span><span class="s2">.</span><span class="s1">message ?: </span><span class="s3">&quot;&quot;</span><span class="s2">)</span>
+                                        <span class="s2">}</span>
+                                    <span class="s2">}</span>
+                                <span class="s2">}</span>
+                                <span class="s1">LaunchedEffect</span><span class="s2">(</span><span class="s1">lugar</span><span class="s2">.</span><span class="s1">traslado</span><span class="s2">) {</span>
+                                    <span class="s1">coroutineScope</span><span class="s2">.</span><span class="s1">launch</span><span class="s2">(</span><span class="s1">Dispatchers</span><span class="s2">.</span><span class="s1">IO</span><span class="s2">) {</span>
+                                        <span class="s0">try </span><span class="s2">{</span>
+                                            <span class="s0">val </span><span class="s1">tiposCambio </span><span class="s2">=</span>
+                                                <span class="s1">CambioAPI</span><span class="s2">.</span><span class="s1">service</span><span class="s2">.</span><span class="s1">getCambioDolar</span><span class="s2">().</span><span class="s1">resultado</span>
+                                            <span class="s1">cambioDolarTrasladoList</span><span class="s2">[</span><span class="s1">index</span><span class="s2">] =</span>
+                                                <span class="s1">lugar</span><span class="s2">.</span><span class="s1">traslado</span><span class="s2">.</span><span class="s1">toDoubleOrNull</span><span class="s2">()</span>
+                                                    <span class="s1">?</span><span class="s2">.</span><span class="s1">let </span><span class="s2">{ </span><span class="s1">it </span><span class="s2">/ </span><span class="s1">tiposCambio</span><span class="s2">.</span><span class="s1">firstOrNull</span><span class="s2">()</span><span class="s1">?</span><span class="s2">.</span><span class="s1">precio</span><span class="s2">!! }</span>
+                                                    <span class="s1">?: </span><span class="s4">0.0</span>
+                                        <span class="s2">} </span><span class="s1">catch </span><span class="s2">(</span><span class="s1">e: Exception</span><span class="s2">) {</span>
+                                            <span class="s1">Log</span><span class="s2">.</span><span class="s1">e</span><span class="s2">(</span><span class="s3">&quot;CambioAPI&quot;</span><span class="s2">, </span><span class="s1">e</span><span class="s2">.</span><span class="s1">message ?: </span><span class="s3">&quot;&quot;</span><span class="s2">)</span>
+                                        <span class="s2">}</span>
+                                    <span class="s2">}</span>
+                                <span class="s2">}</span>
+                                <span class="s1">Text</span><span class="s2">(</span>
+                                    <span class="s1">text </span><span class="s2">= </span><span class="s1">lugar</span><span class="s2">.</span><span class="s1">lugar</span><span class="s2">,</span>
+                                    <span class="s1">textAlign </span><span class="s2">= </span><span class="s1">TextAlign</span><span class="s2">.</span><span class="s1">Center</span><span class="s2">,</span>
+                                    <span class="s1">style </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">typography</span><span class="s2">.</span><span class="s1">bodyLarge</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">fontWeight </span><span class="s2">= </span><span class="s1">FontWeight</span><span class="s2">.</span><span class="s1">Bold</span><span class="s2">)</span>
+                                <span class="s2">)</span>
+                                <span class="s1">Spacer</span><span class="s2">(</span><span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">padding</span><span class="s2">(</span><span class="s4">5</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">))</span>
+
+                                <span class="s1">Text</span><span class="s2">(</span>
+                                    <span class="s1">text </span><span class="s2">= </span><span class="s3">&quot;Costo x Noche:</span><span class="s0">\n</span><span class="s3">&quot; </span><span class="s2">+</span>
+                                            <span class="s3">&quot;CLP: &quot; </span><span class="s2">+ </span><span class="s1">lugar</span><span class="s2">.</span><span class="s1">alojamiento </span><span class="s2">+ </span><span class="s3">&quot; USD: </span><span class="s0">${</span>
+                                        <span class="s3">&quot;%.2f&quot;</span><span class="s2">.</span><span class="s1">format</span><span class="s2">(</span>
+                                            <span class="s1">cambioDolarAlojamientoList</span><span class="s2">[</span><span class="s1">index</span><span class="s2">]</span>
+                                        <span class="s2">)</span>
+                                    <span class="s0">}</span><span class="s3">&quot;</span><span class="s2">,</span>
+                                    <span class="s1">style </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">typography</span><span class="s2">.</span><span class="s1">bodySmall</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span>
+                                        <span class="s1">fontWeight </span><span class="s2">= </span><span class="s1">FontWeight</span><span class="s2">.</span><span class="s1">Bold</span><span class="s2">,</span>
+                                        <span class="s1">fontSize </span><span class="s2">= </span><span class="s4">10</span><span class="s2">.</span><span class="s1">sp</span>
+                                    <span class="s2">)</span>
+                                <span class="s2">)</span>
+                                <span class="s1">Spacer</span><span class="s2">(</span><span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">padding</span><span class="s2">(</span><span class="s4">5</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">))</span>
+
+
+                                <span class="s1">Text</span><span class="s2">(</span>
+                                    <span class="s1">text </span><span class="s2">= </span><span class="s3">&quot;Traslado:</span><span class="s0">\n</span><span class="s3">&quot; </span><span class="s2">+</span>
+                                            <span class="s3">&quot;CLP: &quot; </span><span class="s2">+ </span><span class="s1">lugar</span><span class="s2">.</span><span class="s1">traslado </span><span class="s2">+ </span><span class="s3">&quot; USD: </span><span class="s0">${</span>
+                                        <span class="s3">&quot;%.2f&quot;</span><span class="s2">.</span><span class="s1">format</span><span class="s2">(</span>
+                                            <span class="s1">cambioDolarTrasladoList</span><span class="s2">[</span><span class="s1">index</span><span class="s2">]</span>
+                                        <span class="s2">)</span>
+                                    <span class="s0">}</span><span class="s3">&quot;</span><span class="s2">,</span>
+                                    <span class="s1">style </span><span class="s2">= </span><span class="s1">MaterialTheme</span><span class="s2">.</span><span class="s1">typography</span><span class="s2">.</span><span class="s1">bodySmall</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span>
+                                        <span class="s1">fontWeight </span><span class="s2">= </span><span class="s1">FontWeight</span><span class="s2">.</span><span class="s1">Bold</span><span class="s2">,</span>
+                                        <span class="s1">fontSize </span><span class="s2">= </span><span class="s4">10</span><span class="s2">.</span><span class="s1">sp</span>
+                                    <span class="s2">)</span>
+                                <span class="s2">)</span>
+                                <span class="s1">Spacer</span><span class="s2">(</span><span class="s1">modifier </span><span class="s2">= </span><span class="s1">Modifier</span><span class="s2">.</span><span class="s1">padding</span><span class="s2">(</span><span class="s4">5</span><span class="s2">.</span><span class="s1">dp</span><span class="s2">))</span>
+                                <span class="s1">Row</span><span class="s2">(</span>
+                                    <span class="s1">horizontalArrangement </span><span class="s2">= </span><span class="s1">Arrangement</span><span class="s2">.</span><span class="s1">SpaceBetween</span>
+                                <span class="s2">) {</span>
+                                    <span class="s1">IconButton</span><span class="s2">(</span><span class="s1">onClick </span><span class="s2">= {</span>
+                                        <span class="s1">navController</span><span class="s2">.</span><span class="s1">navigate</span><span class="s2">(</span><span class="s3">&quot;detail_screen/</span><span class="s0">${</span><span class="s1">lugar</span><span class="s2">.</span><span class="s1">id</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+                                    <span class="s2">}) {</span>
+                                        <span class="s1">Icon</span><span class="s2">(</span><span class="s1">Icons</span><span class="s2">.</span><span class="s1">Default</span><span class="s2">.</span><span class="s1">LocationOn</span><span class="s2">,</span>
+                                            <span class="s1">contentDescription </span><span class="s2">= </span><span class="s3">&quot;Ver Detalles&quot;</span><span class="s2">,</span>
+                                            <span class="s1">tint </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">Gray</span>
+                                        <span class="s2">)</span>
+                                    <span class="s2">}</span>
+
+                                    <span class="s1">IconButton</span><span class="s2">(</span><span class="s1">onClick </span><span class="s2">= {</span>
+                                    <span class="s2">}) {</span>
+                                        <span class="s1">Icon</span><span class="s2">(</span><span class="s1">Icons</span><span class="s2">.</span><span class="s1">Default</span><span class="s2">.</span><span class="s1">AccountBox</span><span class="s2">,</span>
+                                            <span class="s1">contentDescription </span><span class="s2">= </span><span class="s3">&quot;Lista Fotos&quot;</span><span class="s2">,</span>
+                                            <span class="s1">tint </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">Gray</span>
+                                        <span class="s2">)</span>
+                                    <span class="s2">}</span>
+
+                                    <span class="s1">IconButton</span><span class="s2">(</span><span class="s1">onClick </span><span class="s2">= {</span>
+                                        <span class="s1">coroutineScope</span><span class="s2">.</span><span class="s1">launch</span><span class="s2">(</span><span class="s1">Dispatchers</span><span class="s2">.</span><span class="s1">IO</span><span class="s2">) {</span>
+                                            <span class="s0">val </span><span class="s1">dbHelper </span><span class="s2">= </span><span class="s1">DBHelper</span><span class="s2">(</span><span class="s1">contexto</span><span class="s2">)</span>
+                                            <span class="s0">val </span><span class="s1">dao </span><span class="s2">= </span><span class="s1">LugaresDao</span><span class="s2">(</span><span class="s1">dbHelper</span><span class="s2">)</span>
+                                            <span class="s1">dao</span><span class="s2">.</span><span class="s1">eliminarLugar</span><span class="s2">(</span><span class="s1">lugar</span><span class="s2">.</span><span class="s1">id</span><span class="s2">)</span>
+
+                                            <span class="s1">setLugares</span><span class="s2">(</span><span class="s1">dao</span><span class="s2">.</span><span class="s1">finAll</span><span class="s2">())</span>
+                                        <span class="s2">}</span>
+                                    <span class="s2">}) {</span>
+                                        <span class="s1">Icon</span><span class="s2">(</span><span class="s1">Icons</span><span class="s2">.</span><span class="s1">Default</span><span class="s2">.</span><span class="s1">Delete</span><span class="s2">,</span>
+                                            <span class="s1">contentDescription </span><span class="s2">= </span><span class="s3">&quot;Eliminar&quot;</span><span class="s2">,</span>
+                                            <span class="s1">tint </span><span class="s2">= </span><span class="s1">Color</span><span class="s2">.</span><span class="s1">Gray</span>
+                                        <span class="s2">)</span>
+                                    <span class="s2">}</span>
+                                <span class="s2">}</span>
+                            <span class="s2">}</span>
+                        <span class="s2">}</span>
+                    <span class="s2">}</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>

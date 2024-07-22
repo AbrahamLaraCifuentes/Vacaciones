@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>CambioServiceFactory.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CambioServiceFactory.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">vacaciones</span><span class="s2">.</span><span class="s1">ws</span>
+
+<span class="s1">import com</span><span class="s2">.</span><span class="s1">squareup</span><span class="s2">.</span><span class="s1">moshi</span><span class="s2">.</span><span class="s1">Moshi</span>
+<span class="s1">import com</span><span class="s2">.</span><span class="s1">squareup</span><span class="s2">.</span><span class="s1">moshi</span><span class="s2">.</span><span class="s1">kotlin</span><span class="s2">.</span><span class="s1">reflect</span><span class="s2">.</span><span class="s1">KotlinJsonAdapterFactory</span>
+<span class="s1">import retrofit2</span><span class="s2">.</span><span class="s1">Retrofit</span>
+<span class="s1">import retrofit2</span><span class="s2">.</span><span class="s1">converter</span><span class="s2">.</span><span class="s1">moshi</span><span class="s2">.</span><span class="s1">MoshiConverterFactory</span>
+
+<span class="s0">class </span><span class="s1">CambioServiceFactory </span><span class="s2">{</span>
+
+    <span class="s1">companion </span><span class="s0">object</span><span class="s2">{</span>
+        <span class="s0">fun </span><span class="s1">getCambioService</span><span class="s2">()</span><span class="s1">: CambioService </span><span class="s2">{</span>
+            <span class="s0">val </span><span class="s1">moshi </span><span class="s2">= </span><span class="s1">Moshi</span><span class="s2">.</span><span class="s1">Builder</span><span class="s2">()</span>
+                <span class="s2">.</span><span class="s1">add</span><span class="s2">( </span><span class="s1">KotlinJsonAdapterFactory</span><span class="s2">() )</span>
+                <span class="s2">.</span><span class="s1">build</span><span class="s2">()</span>
+            <span class="s0">val </span><span class="s1">converterFactory </span><span class="s2">= </span><span class="s1">MoshiConverterFactory</span><span class="s2">.</span><span class="s1">create</span><span class="s2">( </span><span class="s1">moshi </span><span class="s2">)</span>
+            <span class="s0">val </span><span class="s1">baseUrl </span><span class="s2">= </span><span class="s3">&quot;https://www.mindicador.cl&quot;</span>
+            <span class="s0">val </span><span class="s1">retrofit </span><span class="s2">= </span><span class="s1">Retrofit</span><span class="s2">.</span><span class="s1">Builder</span><span class="s2">()</span>
+                <span class="s2">.</span><span class="s1">addConverterFactory</span><span class="s2">( </span><span class="s1">converterFactory </span><span class="s2">)</span>
+                <span class="s2">.</span><span class="s1">baseUrl</span><span class="s2">( </span><span class="s1">baseUrl </span><span class="s2">)</span>
+                <span class="s2">.</span><span class="s1">build</span><span class="s2">()</span>
+            <span class="s0">return </span><span class="s1">retrofit</span><span class="s2">.</span><span class="s1">create</span><span class="s2">( </span><span class="s1">CambioService::</span><span class="s0">class</span><span class="s2">.</span><span class="s1">java</span><span class="s2">)</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s0">object </span><span class="s1">CambioAPI </span><span class="s2">{</span>
+    <span class="s0">val </span><span class="s1">service: CambioService by lazy </span><span class="s2">{</span>
+        <span class="s1">CambioServiceFactory</span><span class="s2">.</span><span class="s1">getCambioService</span><span class="s2">()</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

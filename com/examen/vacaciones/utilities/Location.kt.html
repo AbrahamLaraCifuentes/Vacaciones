@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>Location.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Location.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">vacaciones</span><span class="s2">.</span><span class="s1">utilities</span>
+
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">Manifest</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Context</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">pm</span><span class="s2">.</span><span class="s1">PackageManager</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">location</span><span class="s2">.</span><span class="s1">Location</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">activity</span><span class="s2">.</span><span class="s1">ComponentActivity</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">core</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">ActivityCompat</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">core</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">ActivityCompat</span><span class="s2">.</span><span class="s1">requestPermissions</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">core</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">ContextCompat</span>
+<span class="s1">import com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">gms</span><span class="s2">.</span><span class="s1">location</span><span class="s2">.</span><span class="s1">FusedLocationProviderClient</span>
+<span class="s1">import com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">gms</span><span class="s2">.</span><span class="s1">location</span><span class="s2">.</span><span class="s1">LocationServices</span>
+<span class="s1">import vacaciones</span><span class="s2">.</span><span class="s1">viewmodel</span><span class="s2">.</span><span class="s1">FormRecepcionViewModel</span>
+
+<span class="s0">fun </span><span class="s1">permisoLocalizacion</span><span class="s2">(</span><span class="s1">context: Context</span><span class="s2">)</span><span class="s1">: Boolean </span><span class="s2">{</span>
+    <span class="s0">val </span><span class="s1">permisoFineLocation </span><span class="s2">= </span><span class="s1">ContextCompat</span><span class="s2">.</span><span class="s1">checkSelfPermission</span><span class="s2">(</span>
+        <span class="s1">context</span><span class="s2">,</span>
+        <span class="s1">Manifest</span><span class="s2">.</span><span class="s1">permission</span><span class="s2">.</span><span class="s1">ACCESS_FINE_LOCATION</span>
+    <span class="s2">) == </span><span class="s1">PackageManager</span><span class="s2">.</span><span class="s1">PERMISSION_GRANTED</span>
+
+    <span class="s0">val </span><span class="s1">permisoCoarseLocation </span><span class="s2">= </span><span class="s1">ContextCompat</span><span class="s2">.</span><span class="s1">checkSelfPermission</span><span class="s2">(</span>
+        <span class="s1">context</span><span class="s2">,</span>
+        <span class="s1">Manifest</span><span class="s2">.</span><span class="s1">permission</span><span class="s2">.</span><span class="s1">ACCESS_COARSE_LOCATION</span>
+    <span class="s2">) == </span><span class="s1">PackageManager</span><span class="s2">.</span><span class="s1">PERMISSION_GRANTED</span>
+
+    <span class="s0">return </span><span class="s1">permisoFineLocation </span><span class="s2">&amp;&amp; </span><span class="s1">permisoCoarseLocation</span>
+<span class="s2">}</span>
+
+<span class="s0">fun </span><span class="s1">obtenerUbicacionActual</span><span class="s2">(</span><span class="s1">context: Context</span><span class="s2">, </span><span class="s1">formRecepcionVm: FormRecepcionViewModel</span><span class="s2">) {</span>
+    <span class="s0">val </span><span class="s1">fusedLocationClient: FusedLocationProviderClient </span><span class="s2">= </span><span class="s1">LocationServices</span><span class="s2">.</span><span class="s1">getFusedLocationProviderClient</span><span class="s2">(</span><span class="s1">context</span><span class="s2">)</span>
+
+    <span class="s0">if </span><span class="s2">(</span><span class="s1">permisoLocalizacion</span><span class="s2">(</span><span class="s1">context</span><span class="s2">)) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">ActivityCompat</span><span class="s2">.</span><span class="s1">checkSelfPermission</span>
+                <span class="s2">(</span><span class="s1">context</span><span class="s2">, </span><span class="s1">Manifest</span><span class="s2">.</span><span class="s1">permission</span><span class="s2">.</span><span class="s1">ACCESS_FINE_LOCATION</span><span class="s2">) != </span><span class="s1">PackageManager</span><span class="s2">.</span><span class="s1">PERMISSION_GRANTED </span><span class="s2">&amp;&amp;</span>
+            <span class="s1">ActivityCompat</span><span class="s2">.</span><span class="s1">checkSelfPermission</span>
+                <span class="s2">(</span><span class="s1">context</span><span class="s2">, </span><span class="s1">Manifest</span><span class="s2">.</span><span class="s1">permission</span><span class="s2">.</span><span class="s1">ACCESS_COARSE_LOCATION</span><span class="s2">) != </span><span class="s1">PackageManager</span><span class="s2">.</span><span class="s1">PERMISSION_GRANTED</span><span class="s2">) {</span>
+
+            <span class="s0">return</span>
+        <span class="s2">}</span>
+        <span class="s1">fusedLocationClient</span><span class="s2">.</span><span class="s1">lastLocation</span>
+            <span class="s2">.</span><span class="s1">addOnSuccessListener </span><span class="s2">{ </span><span class="s1">location: Location? </span><span class="s2">-&gt;</span>
+                <span class="s1">formRecepcionVm</span><span class="s2">.</span><span class="s1">ubicacion</span><span class="s2">.</span><span class="s1">value </span><span class="s2">= </span><span class="s1">location</span>
+            <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s0">fun </span><span class="s1">solicitarPermisoUbicacion</span><span class="s2">(</span><span class="s1">activity: ComponentActivity</span><span class="s2">) {</span>
+    <span class="s0">val </span><span class="s1">permisos </span><span class="s2">= </span><span class="s1">arrayOf</span><span class="s2">(</span>
+        <span class="s1">Manifest</span><span class="s2">.</span><span class="s1">permission</span><span class="s2">.</span><span class="s1">ACCESS_FINE_LOCATION</span><span class="s2">,</span>
+        <span class="s1">Manifest</span><span class="s2">.</span><span class="s1">permission</span><span class="s2">.</span><span class="s1">ACCESS_COARSE_LOCATION</span>
+    <span class="s2">)</span>
+
+    <span class="s0">val </span><span class="s1">requestCode </span><span class="s2">= </span><span class="s3">123</span>
+
+    <span class="s1">requestPermissions</span><span class="s2">(</span><span class="s1">activity</span><span class="s2">, </span><span class="s1">permisos</span><span class="s2">, </span><span class="s1">requestCode</span><span class="s2">)</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

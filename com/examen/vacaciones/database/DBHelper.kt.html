@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>DBHelper.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+DBHelper.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">vacaciones</span><span class="s2">.</span><span class="s1">database</span>
+
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Context</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">sqlite</span><span class="s2">.</span><span class="s1">SQLiteDatabase</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">sqlite</span><span class="s2">.</span><span class="s1">SQLiteOpenHelper</span>
+
+<span class="s0">class </span><span class="s1">DBHelper</span><span class="s2">(</span><span class="s1">contexto: Context</span><span class="s2">) </span><span class="s1">: SQLiteOpenHelper</span><span class="s2">(</span><span class="s1">contexto</span><span class="s2">, </span><span class="s1">DB_LUGARES</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s1">DB_VERSION</span><span class="s2">) {</span>
+
+    <span class="s1">companion </span><span class="s0">object</span><span class="s2">{</span>
+        <span class="s1">const </span><span class="s0">val </span><span class="s1">DB_LUGARES </span><span class="s2">= </span><span class="s3">&quot;lugares.db&quot;</span>
+        <span class="s1">const </span><span class="s0">val </span><span class="s1">DB_VERSION </span><span class="s2">= </span><span class="s4">1</span>
+        <span class="s1">const </span><span class="s0">val </span><span class="s1">SQL_CREACION_TABLAS </span><span class="s2">= </span><span class="s3">&quot;&quot;&quot;</span>
+            <span class="s3">CREATE TABLE </span><span class="s0">${</span><span class="s1">DBLugares</span><span class="s2">.</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">TABLA_LISTA_LUGARES</span><span class="s0">}</span><span class="s3">(</span>
+            <span class="s0">${</span><span class="s1">DBLugares</span><span class="s2">.</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_ID</span><span class="s0">} </span><span class="s3">INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+            <span class="s0">${</span><span class="s1">DBLugares</span><span class="s2">.</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_LUGAR</span><span class="s0">} </span><span class="s3">TEXT,</span>
+            <span class="s0">${</span><span class="s1">DBLugares</span><span class="s2">.</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_IMG_URL</span><span class="s0">} </span><span class="s3">TEXT,</span>
+            <span class="s0">${</span><span class="s1">DBLugares</span><span class="s2">.</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_LAT_LONG</span><span class="s0">} </span><span class="s3">TEXT,</span>
+            <span class="s0">${</span><span class="s1">DBLugares</span><span class="s2">.</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_ORDEN</span><span class="s0">} </span><span class="s3">TEXT,</span>
+            <span class="s0">${</span><span class="s1">DBLugares</span><span class="s2">.</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_ALOJAMIENTO</span><span class="s0">} </span><span class="s3">FLOAT,</span>
+            <span class="s0">${</span><span class="s1">DBLugares</span><span class="s2">.</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_TRASLADO</span><span class="s0">} </span><span class="s3">FLOAT,</span>
+            <span class="s0">${</span><span class="s1">DBLugares</span><span class="s2">.</span><span class="s1">TablaLugares</span><span class="s2">.</span><span class="s1">COLUMNA_COMENTARIOS</span><span class="s0">} </span><span class="s3">TEXT</span>
+            <span class="s3">)</span>
+        <span class="s3">&quot;&quot;&quot;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">db: SQLiteDatabase?</span><span class="s2">) {</span>
+        <span class="s1">db?</span><span class="s2">.</span><span class="s1">execSQL</span><span class="s2">(</span><span class="s1">SQL_CREACION_TABLAS</span><span class="s2">)</span>
+    <span class="s2">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onUpgrade</span><span class="s2">(</span><span class="s1">p0: SQLiteDatabase?</span><span class="s2">, </span><span class="s1">p1: Int</span><span class="s2">, </span><span class="s1">p2: Int</span><span class="s2">) {</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

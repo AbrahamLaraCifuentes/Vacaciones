@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>CambioService.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CambioService.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">vacaciones</span><span class="s2">.</span><span class="s1">ws</span>
+
+<span class="s1">import retrofit2</span><span class="s2">.</span><span class="s1">http</span><span class="s2">.</span><span class="s1">GET</span>
+
+<span class="s0">interface </span><span class="s1">CambioService </span><span class="s2">{</span>
+
+    <span class="s3">//https://www.mindicador.cl/api/dolar</span>
+    <span class="s1">@GET</span><span class="s2">(</span><span class="s4">&quot;api/dolar&quot;</span><span class="s2">)</span>
+    <span class="s1">suspend </span><span class="s0">fun </span><span class="s1">getCambioDolar</span><span class="s2">()</span><span class="s1">: ListaCambio</span>
+
+<span class="s2">}</span></pre>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>MainActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">examen</span><span class="s2">.</span><span class="s1">vacaciones</span>
+
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">activity</span><span class="s2">.</span><span class="s1">ComponentActivity</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">activity</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">setContent</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">activity</span><span class="s2">.</span><span class="s1">viewModels</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">runtime</span><span class="s2">.</span><span class="s1">Composable</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">navigation</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">NavHost</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">navigation</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">composable</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">navigation</span><span class="s2">.</span><span class="s1">compose</span><span class="s2">.</span><span class="s1">rememberNavController</span>
+<span class="s1">import vacaciones</span><span class="s2">.</span><span class="s1">database</span><span class="s2">.</span><span class="s1">DBHelper</span>
+<span class="s1">import vacaciones</span><span class="s2">.</span><span class="s1">screen</span><span class="s2">.</span><span class="s1">CameraScreen</span>
+<span class="s1">import vacaciones</span><span class="s2">.</span><span class="s1">screen</span><span class="s2">.</span><span class="s1">DetailScreen</span>
+<span class="s1">import vacaciones</span><span class="s2">.</span><span class="s1">screen</span><span class="s2">.</span><span class="s1">FormScreen</span>
+<span class="s1">import vacaciones</span><span class="s2">.</span><span class="s1">screen</span><span class="s2">.</span><span class="s1">HomeScreen</span>
+<span class="s1">import vacaciones</span><span class="s2">.</span><span class="s1">viewmodel</span><span class="s2">.</span><span class="s1">FormRecepcionViewModel</span>
+
+
+<span class="s0">class </span><span class="s1">MainActivity : ComponentActivity</span><span class="s2">() {</span>
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">dbHelper: DBHelper</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState: Bundle?</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">)</span>
+
+        <span class="s1">dbHelper </span><span class="s2">= </span><span class="s1">DBHelper</span><span class="s2">(</span><span class="s0">this</span><span class="s2">)</span>
+        <span class="s1">setContent </span><span class="s2">{</span>
+            <span class="s1">Navigation</span><span class="s2">(</span><span class="s1">dbHelper</span><span class="s2">)</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+
+    <span class="s1">@Composable</span>
+    <span class="s0">fun </span><span class="s1">Navigation</span><span class="s2">(</span><span class="s1">dbHelper: DBHelper</span><span class="s2">) {</span>
+        <span class="s0">val </span><span class="s1">navController </span><span class="s2">= </span><span class="s1">rememberNavController</span><span class="s2">()</span>
+        <span class="s0">val </span><span class="s1">formRecepcionVm: FormRecepcionViewModel by viewModels</span><span class="s2">()</span>
+
+        <span class="s1">NavHost</span><span class="s2">(</span><span class="s1">navController </span><span class="s2">= </span><span class="s1">navController</span><span class="s2">, </span><span class="s1">startDestination </span><span class="s2">= </span><span class="s3">&quot;home_screen&quot;</span><span class="s2">) {</span>
+            <span class="s1">composable</span><span class="s2">(</span><span class="s3">&quot;home_screen&quot;</span><span class="s2">) {</span>
+                <span class="s1">HomeScreen</span><span class="s2">(</span><span class="s1">navController</span><span class="s2">)</span>
+            <span class="s2">}</span>
+            <span class="s1">composable</span><span class="s2">(</span><span class="s3">&quot;form_screen&quot;</span><span class="s2">) {</span>
+                <span class="s1">FormScreen</span><span class="s2">(</span><span class="s1">navController</span><span class="s2">)</span>
+            <span class="s2">}</span>
+            <span class="s1">composable</span><span class="s2">(</span><span class="s3">&quot;detail_screen/{lugarId}&quot;</span><span class="s2">) { </span><span class="s1">backStackEntry </span><span class="s2">-&gt;</span>
+                <span class="s0">val </span><span class="s1">lugarId </span><span class="s2">= </span><span class="s1">backStackEntry</span><span class="s2">.</span><span class="s1">arguments?</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s3">&quot;lugarId&quot;</span><span class="s2">)</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">lugarId </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+                    <span class="s1">DetailScreen</span><span class="s2">(</span><span class="s1">navController</span><span class="s2">, </span><span class="s1">lugarId</span><span class="s2">, </span><span class="s1">formRecepcionVm</span><span class="s2">)</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+            <span class="s1">composable</span><span class="s2">(</span><span class="s3">&quot;camera_screen&quot;</span><span class="s2">) { </span><span class="s1">backStackEntry </span><span class="s2">-&gt;</span>
+                <span class="s0">val </span><span class="s1">lugarId </span><span class="s2">= </span><span class="s1">backStackEntry</span><span class="s2">.</span><span class="s1">arguments?</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s3">&quot;lugarId&quot;</span><span class="s2">)</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">lugarId </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+                    <span class="s1">CameraScreen</span><span class="s2">(</span><span class="s1">navController</span><span class="s2">)</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+
+
+</pre>
+</body>
+</html>
